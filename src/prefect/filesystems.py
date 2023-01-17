@@ -1,6 +1,7 @@
 import abc
 import io
 import json
+import shutil
 import urllib.parse
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -919,4 +920,5 @@ class GitHub(ReadableDeploymentStorage):
                 dst_dir=local_path, src_dir=tmp_dir, sub_directory=from_path
             )
 
-            copytree(src=content_source, dst=content_destination, dirs_exist_ok=True)
+            copytree(src=content_source, dst=content_destination,
+                     dirs_exist_ok=True, copy_function=shutil.copyfile)
